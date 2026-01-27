@@ -1,0 +1,71 @@
+#---version1.0---#
+#date: 10302025
+#configuration for 1d-ahead forecast runs
+#=========================================================
+#[use the following random seeds one by one for each run] 
+#5381942, 1092025, 4165927, 7026835, 1849671
+seed: 1849671 
+
+#general folders
+rootdir:  '/home/suna/work/camelsnet'            #project root folder
+nwm_root_dir: '/home/suna/work/nwm'              #nwm data
+nhdplusdbroot: '/home/suna/work/nwm/nhdplusdb'   #nhdplusDB
+camel_data_repo: 'camels_data'                   #repo of all camels data downloaded externally
+camel_dataset_dir: 'camels_dataset'              #repo of all camels datasets to be used by GNN 
+
+model: 
+  output_dir: 'output_lstmdaily'
+  logging_dir: 'log'
+  logger: 'wandb'
+
+  train_start_date: '1980-10-01'
+  train_end_date: '1992-09-30'  
+  val_start_date: '1992-10-01'
+  val_end_date: '1995-09-30' #
+  start_date: '1995-10-01'   #start date of test period
+  end_date: '2005-09-30'     #end date of the test period
+  
+  num_epochs: 50
+  learning_rate: 0.001
+  mixed_precision: 'no'           #no, fp16, bf16, note if the original model is trained with no, a scaler.pt error will occir
+  gradient_accumulation_steps: 1  #good for rollout
+  lr_warmup_steps: 20000
+  norm: 'l2'
+  
+  checkpointing_steps: 4000   #frequency of saving checkpoint files 
+  checkpoints_total_limit: 20
+
+  chkpoint_path: 'checkpoint-1600'
+
+  adam_beta1: 0.95     #momentum
+  adam_beta2: 0.999
+  adam_weight_decay: 1e-6
+  adam_epsilon: 1e-8
+  clim_norm: 2.0
+
+  use_ema: True
+  ema_max_decay: 0.999 #The maximum decay magnitude for EMA.
+  ema_inv_gamma: 1.0   #The inverse gamma value for the EMA decay
+  ema_power: 0.75      #The power value for the EMA decay
+  patience: 5
+
+  batch_size: 256
+  num_workers: 4
+  num_workers_test: 2
+  batch_size_test: 512
+  
+  in_dim: 1
+  hidden_size: 128
+  num_layers: 1
+  
+  seq_len: 365 
+  pred_len: 1  
+
+  log_transform: True        #note: log_transform and gage_based scaling do not work. These two options should always be false
+  transform_method: 'feng'    #log, feng
+  normalization: True  
+  
+  add_forcing: False
+  predict_mode: 'forecast'
+
+  
