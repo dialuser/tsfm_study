@@ -1,6 +1,6 @@
 # Time Series Foundation Model Study
 
-This repository contains source codes used for Sun, A.Y. and Sun, A.A, *Zero-shot Forecasting of Streamflow Using Time Series Foundation Models: Are We There Yet?*
+This repository contains source codes used for Sun, A.Y. and Sun, A.A, *Zero-shot Forecasting of Streamflow Using Time Series Foundation Models: Are We There Yet?* IOP Machine Learning: Earth, 2026
 
 ### Univeriate  LSTM Experiments
 
