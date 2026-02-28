@@ -1,0 +1,32 @@
+#---version2.0---#
+#date: 10082025
+#These are sundial specific configurations
+#-----------------
+seed: 1092025
+
+#general folders
+nwm_root_dir: '/home/suna/work/nwm' #nwm data, this should be adjusted to your camels data folder
+
+batch_size: 128
+num_workers: 6
+
+model:    
+  model_type: 'moirai' #valid choices: 'moirai', 'sundial', 'chronos', 'ttm'
+  seq_len: 365 # lookback window days
+  pred_len:  7  # forecast horizon days
+  num_samples: 10
+  train_start_date: '1980-10-01'
+  train_end_date:   '1992-09-30'  
+  val_start_date:   '1992-10-01'
+  val_end_date:     '1995-09-30' #
+  start_date: '1995-10-01'   #start date of the study period,  AORC starts on 2000/01/01
+  end_date: '2005-09-30'     #end date of the study period
+  allow_missing: False       #if True, data in the lookback can be missing
+
+  log_transform: True        #note: log_transform and gage_based scaling do not work. These two options should always be false
+  transform_method: 'log'    #log, feng
+  normalization: True  
+  
+  min_data_fraction: 0.9       #cutoff for gauge record missingness
+  predict_mode: 'forecast'
+  remove_zero_flow: False

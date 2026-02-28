@@ -1,0 +1,34 @@
+#---version1.0---#
+#date: 09292024
+#-----------------
+seed: 1092025
+
+#general folders
+rootdir:  '/home/suna/work/camelsnet'            #project root folder
+nwm_root_dir: '/home/suna/work/nwm'              #nwm data
+nhdplusdbroot: '/home/suna/work/nwm/nhdplusdb'   #nhdplusDB
+camel_data_repo: 'camels_data'                   #repo of all camels data downloaded externally
+camel_dataset_dir: 'camels_dataset'              #repo of all camels datasets to be used by GNN 
+
+filtergages: True          #True to filter only usgs gages with complete records during the study period
+
+batch_size: 128
+num_workers: 6
+
+model:    
+  model_type: 'sundial' #'moirai', 'sundial', 'chronos', 'ttm'
+  seq_len: 240 #56, 128, 240
+  pred_len:  8  #8, 24
+  num_samples: 20
+  train_start_date: '1995-10-01'   #start date of the study period,  AORC starts on 2000/01/01
+  train_end_date: '2005-09-30'     #end date of the study period
+  start_date: '2010-10-01'   #start date of the study period,  AORC starts on 2000/01/01
+  end_date: '2020-09-30'     #end date of the study period
+
+  log_transform:     True    #note: log_transform and gage_based scaling do not work. These two options should always be false
+  transform_method: 'feng'    #log
+  normalization: True
+  
+  min_data_fraction: 0.9       #cutoff for gauge record missingness
+  predict_mode: 'forecast'
+  allow_missing: True
